@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         B站自动更换直播间粉丝勋章
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  打开B站直播间自动更换相应的粉丝勋章
 // @author       GitLouu
 // @match        *://live.bilibili.com/*
@@ -31,8 +31,7 @@
     .then(res => res.json());
     if (!info || info.code !== 0) return;
     const uid = info.data.medal.up_medal.uid;
-    if (uid === info.data.medal.curr_weared.target_id) return;
-
+    if (info.data.medal.curr_weared && info.data.medal.curr_weared.target_id && uid === info.data.medal.curr_weared.target_id) return;
     // 获取 当前房间的粉丝勋章id
     let medalId = -1;
     let medalName = '';
